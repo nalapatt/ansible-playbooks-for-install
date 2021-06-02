@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  
+  tasks:
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+     - name: start docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
